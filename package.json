@@ -1,0 +1,27 @@
+{
+  "name": "techblog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlportu/techblog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mlportu/techblog/issues"
+  },
+  "homepage": "https://github.com/mlportu/techblog#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.5"
+  }
+}
