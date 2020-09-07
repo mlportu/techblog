@@ -172,7 +172,11 @@
   footer {
     border-top: 1px solid #ccc;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     padding: 1%;
     font-size: 110%;
+  }
+
+  .portfolio{
+    margin: 0px, 5px;
   }
