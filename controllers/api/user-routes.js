@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {User} = require('../../models');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 //GET /api/users
 router.get('/', (req, res) => {
@@ -22,26 +22,20 @@ router.get('/:id', (req, res) => {
         where:{
             id: req.params.id
         },
-        // include: [
-        //     {
-        //         model: Post,
-        //         attributes: ['id', 'title', 'post_url', 'created_at']
-        //     },
-        //     {
-        //         model: Comment,
-        //         attributes: ['id', 'comment_text', 'created_at'],
-        //         include: {
-        //             model: Post,
-        //             attributes: ['title']
-        //         },
-        //     },
-        //     {
-        //         model: Post,
-        //         attributes: ['title'],
-        //         through: Vote,
-        //         as: 'voted_posts'   
-        //     }
-        // ]        
+        include: [
+            {
+                model: Post,
+                attributes: ['id', 'title', 'post_url', 'created_at']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'created_at'],
+                include: {
+                    model: Post,
+                    attributes: ['title']
+                },
+            },
+        ]        
     })
         .then(dbUserData => {
             if(!dbUserData){
@@ -57,7 +51,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST /api/users
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
         username: req.body.username,
@@ -87,7 +81,7 @@ router.post('/login', (req, res) => {
         }
     }).then(dbUserData => {
         if (!dbUserData) {
-          res.status(400).json({ message: 'No user with that email address!' });
+          res.status(400).json({ message: 'No user with that username!' });
           return;
         }
     
@@ -122,7 +116,7 @@ router.post('/logout', (req, res) => {
 });
 
 // Update user info /api/users/1
-router.put('/:id', (req, res) => {;
+router.put('/:id', withAuth, (req, res) => {;
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
@@ -145,7 +139,7 @@ router.put('/:id', (req, res) => {;
 });   
 
 // DELETE /api/users/1
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id
