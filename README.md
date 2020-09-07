@@ -26,7 +26,7 @@ https://frozen-fjord-11998.herokuapp.com/
 
 __Images__
 
-<img src="assets/images/login.png" width="500">
+<img src="assets/images/login" width="500">
 <img src="assets/images/homepage.png" width="500">
 <img src="assets/images/dashboard.png" width="500">
-<img src="assets/images/edit-post.png" width="500">
+<img src="assets/images/edit.png" width="500">
