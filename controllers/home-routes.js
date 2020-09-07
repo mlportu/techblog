@@ -49,6 +49,7 @@ router.get('/login', (req,res) => {
 });
 
 router.get('/post/:id', (req, res) => {
+    // console.log(req.session);
     Post.findOne({
         where: {
             id: req.params.id
@@ -85,7 +86,8 @@ router.get('/post/:id', (req, res) => {
    
            //pass data to template
            res.render('single-post', {
-                post
+                post,
+                loggedIn: req.session.loggedIn
             //    loggedIn: req.session.loggedIn
             });
        })
